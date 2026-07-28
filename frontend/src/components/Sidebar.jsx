@@ -1,5 +1,5 @@
 import React from 'react'
-import { WandSparkles, Search, Image, SunMedium } from 'lucide-react'
+// import { WandSparkles, Search, Image, SunMedium } from 'lucide-react'
 
 function Sidebar() {
   return (
@@ -8,7 +8,7 @@ function Sidebar() {
      {/* -Chat Icon */}
       <div className="flex gap-2 p-4">
           <span className="h-10 w-10 my-2 rounded-[10px] p-2 bg-linear-to-br from-[#916CFB] via-[#7C70FA] to-[#5A76FD]">
-            <WandSparkles />
+            {/* <WandSparkles /> */}
         </span>
 
         <div className="">
@@ -25,7 +25,7 @@ function Sidebar() {
 
      <div className="flex gap-2 p-2 text-white border border-gray-700 rounded-[5px] ">
         <span>
-            <Search />
+            {/* <Search /> */}
         </span>
         <input type="text" placeholder="Search Conversation" />
       </div>
@@ -45,7 +45,7 @@ function Sidebar() {
 
             <div className="flex gap-2 p-2 text-white border border-gray-700 rounded-[5px] cursor-pointer mt-40">
                 <span>
-                    <Image />
+                    {/* <Image /> */}
                 </span>
                 <h1>Community Image</h1>
             </div>
@@ -53,14 +53,9 @@ function Sidebar() {
             {/* -toggle */}
 
             <div className="text-white mt-4 flex gap-2 border border-gray-700 p-2 cursor-pointer">
-                <SunMedium size={25} />
+                {/* <SunMedium size={25} /> */}
                 <span>Dark Mode</span>
             </div>
-
-
-
-
-
 
 </div>
   )

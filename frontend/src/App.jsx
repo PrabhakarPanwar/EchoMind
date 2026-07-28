@@ -12,9 +12,9 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<History />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </div>
   )
