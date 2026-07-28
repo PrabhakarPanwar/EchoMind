@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import connect from "./database/connectDB.js";
+import connect from "./config/connectDB.js";
 import HomeRouter from "./routes/authRoute.js";
 
 const app = express();
