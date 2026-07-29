@@ -4,98 +4,102 @@ import axiosInstance from '../../api/axios'
 
 function ChatBox() {
     const [prompt, setPrompt] = useState("")
+    const [messages, setMessages] = useState([])
 
-    const { mutate, isPending, error, data } = useMutation({
-        mutationFn: async () => {
-            const res = await axiosInstance.post("/promptData", { prompt })
+    const { mutate, isPending, error } = useMutation({
+        mutationFn: async (userPrompt) => {
+            const res = await axiosInstance.post("/promptData", { prompt: userPrompt })
             return res.data;
+        },
+        onSuccess: (data, userPrompt) => {
+            setMessages((prev) => [
+                ...prev,
+                { role: 'user', text: userPrompt },
+                { role: 'ai', text: data.reply }
+            ])
+            setPrompt("")
         }
     })
 
+    const handleSend = () => {
+        if (!prompt.trim() || isPending) return
+        mutate(prompt)
+    }
+
     return (
-        <div className=' p-5'>
+        <div className='flex flex-col items-center'>
 
-            {/* Chat section  */}
-
-            <div className='flex items-center flex-col gap-10 p-5'>
-
-                {/* user chat */}
-                <div className='w-[50%] ms-auto flex flex-row-reverse items-center gap-5'>
-                    <span className='rounded-full border-amber-300 border-2 p-1'>User</span>
-                    <h1 className=''>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero velit ab facilis cumque quibusdam voluptatum, fuga sit aperiam molestias</h1>
+            {messages.length === 0 && !isPending && (
+                <div className='flex flex-col items-center text-center gap-3 px-5 pt-24 pb-10'>
+                    <h1 className='text-3xl lg:text-4xl font-semibold'>What's on your mind?</h1>
+                    <p className='text-gray-500 max-w-md'>
+                        Ask me anything — I can help you brainstorm, explain, write, or just talk things through.
+                    </p>
                 </div>
+            )}
 
-                {/* ai chat  */}
+            {/* Chat section */}
+            <div className='flex mx-auto flex-col gap-6 p-5 w-[85%] lg:w-[60%] '>
+                {messages.map((msg, i) =>
+                    msg.role === 'user' ? (
+                        <div key={i} className='w-fit max-w-[70%] ms-auto flex flex-row-reverse items-end gap-3'>
+                            <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>User</span>
+                            <div className='bg-amber-300/20 border border-amber-300/40 rounded-2xl rounded-br-sm px-4 py-2.5'>
+                                <p className='text-sm leading-relaxed'>{msg.text}</p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div key={i} className='w-fit max-w-[80%] flex items-end gap-3'>
+                            <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>AI</span>
+                            <div className='rounded-2xl rounded-bl-sm px-4 py-2.5'>
+                                <p className='text-sm leading-relaxed whitespace-pre-wrap'>{msg.text}</p>
+                            </div>
+                        </div>
+                    )
+                )}
 
-                <div className='w-[80%] flex  items-center gap-5 '>
-                    <span className='rounded-full border-amber-300 border-2 p-1'>AIsd</span>
-                    <h1 className='flex-wrap' >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas voluptates, deleniti libero est maiores culpa odio aliquid, minima iure cum magnam sint earum</h1>
-                </div>
+                {isPending && (
+                    <div className='w-fit flex items-end gap-3'>
+                        <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>AI</span>
+                        <div className='bg-gray-100 rounded-2xl rounded-bl-sm px-4 py-3.5 flex items-center gap-1.5'>
+                            <span className='w-2 h-2 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.3s]' />
+                            <span className='w-2 h-2 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.15s]' />
+                            <span className='w-2 h-2 rounded-full bg-gray-400 animate-bounce' />
+                        </div>
+                    </div>
+                )}
 
-
+                {error && (
+                    <div className='w-fit max-w-[80%] text-red-500 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-2.5'>
+                        An error has occurred: {error.message}
+                    </div>
+                )}
             </div>
-            {/* Input section Isko Dekhliyo ek baar choti badi screen mai  */}
 
-            <div className='w-fit lg:w-[50%] p-5 bg-black rounded-full sticky bottom-0 flex items-center gap-3 translate-x-[50%] '>
+            <div className='w-fit lg:w-[30%] p-5 bg-black rounded-full flex items-center gap-3'>
                 <button className='text-white hover:text-gray-300 transition-colors'>
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M12 5V19"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M5 12H19"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 5V19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
                 <input
-                    onChange={(i) => setPrompt(i.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && mutate()}
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                     type="text"
                     placeholder='what on your mind ...?'
-                    className='flex-1 bg-transparent outline-none text-white placeholder:text-gray-500'
-
+                    disabled={isPending}
+                    className='flex-1 bg-transparent outline-none text-white placeholder:text-gray-500 disabled:opacity-50'
                 />
-                <button onClick={mutate} className='text-white hover:text-gray-300 transition-colors'>
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M22 2L11 13"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M22 2L15 22L11 13L2 9L22 2Z"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
+                <button onClick={handleSend} disabled={isPending} className='text-white hover:text-gray-300 transition-colors disabled:opacity-50'>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
             </div>
         </div>
-
     )
 }
 

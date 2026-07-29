@@ -5,9 +5,9 @@ import connect from "./config/connectDB.js";
 import HomeRouter from "./routes/authRoute.js";
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 connect();
 
 app.use(HomeRouter);

@@ -1,19 +1,19 @@
 import React from "react";
 
 function Sidebar({ open, setOpen }) {
-  return (
-    <>
-      {/* Overlay */}
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 bg-black/50 z-30 "
-        ></div>
-      )}
+    return (
+        <>
+            {/* Overlay */}
+            {open && (
+                <div
+                    onClick={() => setOpen(false)}
+                    className="fixed inset-0 bg-black/50 z-30 "
+                ></div>
+            )}
 
-      {/* Sidebar */}
-      <div
-        className={`
+            {/* Sidebar */}
+            <div
+                className={`
           fixed
           top-0 left-0
           h-screen
@@ -25,146 +25,146 @@ function Sidebar({ open, setOpen }) {
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
         `}
-      >
-        {/* Close Button */}
-        <button
-          className="absolute top-4 right-4 text-white "
-          onClick={() => setOpen(false)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M18 6L6 18" />
-            <path d="M6 6L18 18" />
-          </svg>
-        </button>
-
-        {/* Chat Icon */}
-        <div className="flex gap-2 p-4 mt-8 md:mt-0">
-          <span className="h-10 w-10 rounded-[10px] p-2 bg-linear-to-br from-[#916CFB] via-[#7C70FA] to-[#5A76FD]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
             >
-              <path d="M4 20L20 4" />
-              <path d="M18 2L19 4L21 5L19 6L18 8L17 6L15 5L17 4Z" />
-              <path d="M6 4V6" />
-              <path d="M5 5H7" />
-              <path d="M18 14V16" />
-              <path d="M17 15H19" />
-            </svg>
-          </span>
+                {/* Close Button */}
+                <button
+                    className="absolute top-4 right-4 text-white "
+                    onClick={() => setOpen(false)}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <path d="M18 6L6 18" />
+                        <path d="M6 6L18 18" />
+                    </svg>
+                </button>
 
-          <div>
-            <h1 className="text-[22px] font-bold text-white">
-              Quick GPT
-            </h1>
-            <p className="text-[14px] font-medium text-[#94a3b8]">
-              Intelligent AI Assistant
-            </p>
-          </div>
-        </div>
+                {/* Chat Icon */}
+                <div className="flex items-center gap-2 p-4 mt-8 md:mt-0">
+                    <span className="h-10 w-10 rounded-[10px] p-2 bg-linear-to-br from-[#916CFB] via-[#7C70FA] to-[#5A76FD]">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <path d="M4 20L20 4" />
+                            <path d="M18 2L19 4L21 5L19 6L18 8L17 6L15 5L17 4Z" />
+                            <path d="M6 4V6" />
+                            <path d="M5 5H7" />
+                            <path d="M18 14V16" />
+                            <path d="M17 15H19" />
+                        </svg>
+                    </span>
 
-        {/* New Chat */}
-        <button
-          className="rounded-md text-white font-bold my-8 w-full h-10
+                    <div>
+                        <h1 className="text-[22px] font-bold text-white">
+                            EchoMind
+                        </h1>
+                        <p className="text-sm font-medium text-[#94a3b8]">
+                            Your thoughts reflected back intelligently
+                        </p>
+                    </div>
+                </div>
+
+                {/* New Chat */}
+                <button
+                    className="rounded-md text-white font-bold my-8 w-full h-10
           bg-linear-to-br from-[#916CFB] via-[#7C70FA] to-[#5A76FD]
           hover:from-[#A78BFA]
           hover:via-[#8B5CF6]
           hover:to-[#6366F1]
           transition-all duration-300"
-        >
-          + New Chat
-        </button>
+                >
+                    + New Chat
+                </button>
 
-        {/* Search */}
-        <div className="flex gap-2 p-2 text-white border border-gray-700 rounded-md">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="M20 20L16.65 16.65" />
-          </svg>
+                {/* Search */}
+                <div className="flex items-center gap-2 p-2 text-white border border-gray-700 rounded-md">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M20 20L16.65 16.65" />
+                    </svg>
 
-          <input
-            className="outline-none bg-transparent w-full"
-            type="text"
-            placeholder="Search Conversation"
-          />
-        </div>
+                    <input
+                        className="outline-none bg-transparent w-full"
+                        type="text"
+                        placeholder="Search Conversation"
+                    />
+                </div>
 
-        {/* Recent Chats */}
-        <div className="text-white my-6">
-          <h4 className="font-medium mb-3">Recent Chats</h4>
+                {/* Recent Chats */}
+                <div className="text-white my-6">
+                    <h4 className="font-medium mb-3">Recent Chats</h4>
 
-          <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer">
-            <p className="text-[14px] font-medium">
-              How AI Works
-            </p>
+                    <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer">
+                        <p className="text-[14px] font-medium">
+                            How AI Works
+                        </p>
 
-            <p className="text-[12px] text-gray-400">
-              1 min ago
-            </p>
-          </div>
-        </div>
+                        <p className="text-[12px] text-gray-400">
+                            1 min ago
+                        </p>
+                    </div>
+                </div>
 
-        {/* Bottom */}
-        <div className="absolute bottom-6 left-2 right-2">
+                {/* Bottom */}
+                <div className="absolute bottom-6 left-2 right-2">
 
-          <div className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="9" cy="9" r="2" />
-              <path d="M21 15l-5-5L5 21" />
-            </svg>
+                    <div className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="9" cy="9" r="2" />
+                            <path d="M21 15l-5-5L5 21" />
+                        </svg>
 
-            <h1>Community Image</h1>
-          </div>
+                        <h1>Community Image</h1>
+                    </div>
 
-          <div className="text-white mt-4 flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
-            <span>🌙 Dark Mode</span>
-            <div className="w-12 h-6 bg-gray-600 rounded-full p-1 cursor-pointer transition-all duration-300">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
+                    <div className="text-white mt-4 flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
+                        <span>🌙 Dark Mode</span>
+                        <div className="w-12 h-6 bg-gray-600 rounded-full p-1 cursor-pointer transition-all duration-300">
+                            <div className="w-4 h-4 bg-white rounded-full"></div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
 
 export default Sidebar;

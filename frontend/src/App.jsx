@@ -8,11 +8,11 @@ import Sidebar from './components/Sidebar'
 import Humburger from './components/Humburger'
 
 function App() {
-    
+
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex">
+    <div className="w-[95%]">
       <Humburger open={open} setOpen={setOpen} />
       <Sidebar open={open} setOpen={setOpen} />
       <Routes>

@@ -1,4 +1,16 @@
-export const promptData = (req, res) => {
+import { generateReply } from "../config/connectGenAi.js";
+
+export const promptData = async (req, res) => {
   const { prompt } = req.body;
-  console.log(prompt);
+  if (!prompt || !prompt.trim()) {
+    return res.status(400).json({ error: "Prompt is required" });
+  }
+
+  try {
+    const reply = await generateReply(prompt);
+    res.json({ reply });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to generate response" });
+  }
 };
