@@ -1,3 +1,4 @@
-export const first = (req, res) => {
-  console.log("working");
+export const promptData = (req, res) => {
+  const { prompt } = req.body;
+  console.log(prompt);
 };

@@ -1,8 +1,8 @@
 import express from "express";
-import { first } from "../controller/authContoller.js";
+import { promptData } from "../controller/authContoller.js";
 
 const HomeRouter = express();
 
-HomeRouter.get("/ok", first);
+HomeRouter.post("/promptData", promptData);
 
 export default HomeRouter;
