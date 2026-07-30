@@ -7,6 +7,7 @@ function ChatBox() {
     const [messages, setMessages] = useState([])
 
     const { mutate, isPending, error } = useMutation({
+
         mutationFn: async (userPrompt) => {
             const res = await axiosInstance.post("/promptData", { prompt: userPrompt })
             return res.data;
@@ -18,17 +19,17 @@ function ChatBox() {
                 { role: 'ai', text: data.reply }
             ])
             setPrompt("")
-        }
+        },
+
     })
 
     const handleSend = () => {
-        if (!prompt.trim() || isPending) return
+        if (isPending) return
         mutate(prompt)
     }
 
     return (
         <div className='flex flex-col items-center'>
-
             {messages.length === 0 && !isPending && (
                 <div className='flex flex-col items-center text-center gap-3 px-5 pt-24 pb-10'>
                     <h1 className='text-3xl lg:text-4xl font-semibold'>What's on your mind?</h1>
@@ -71,7 +72,7 @@ function ChatBox() {
 
                 {error && (
                     <div className='w-fit max-w-[80%] text-red-500 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-2.5'>
-                        An error has occurred: {error.message}
+                        An error has occurred: {error.response?.data?.message || error.message}
                     </div>
                 )}
             </div>
@@ -88,6 +89,7 @@ function ChatBox() {
                     onChange={(e) => setPrompt(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                     type="text"
+                    required
                     placeholder='what on your mind ...?'
                     disabled={isPending}
                     className='flex-1 bg-transparent outline-none text-white placeholder:text-gray-500 disabled:opacity-50'

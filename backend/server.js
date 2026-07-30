@@ -4,11 +4,24 @@ import "dotenv/config";
 import connect from "./config/connectDB.js";
 import HomeRouter from "./routes/authRoute.js";
 
+const allowedOrigins = process.env.ALLOWED_ORIGIN;
+
 const app = express();
-app.use(cors());
+connect();
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-connect();
 
 app.use(HomeRouter);
 
