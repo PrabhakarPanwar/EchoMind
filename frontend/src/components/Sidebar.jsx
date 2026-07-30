@@ -1,7 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {useNavigate} from 'react-router-dom'
+
 
 function Sidebar({ open, setOpen }) {
+
+    const navigate = useNavigate()
+
   return (
     <>
       {/* Overlay */}
@@ -181,8 +185,8 @@ function Sidebar({ open, setOpen }) {
             </div>
           </div>
 
-          <div className="">
-            <button>
+          <div className="my-4 text-[18px] font-medium rounded h-10 w-20 border border-gray-700 hover: px-3 py-1">
+            <button className="cursor-pointer outline-none" onClick={()=>navigate("/login")}> 
               Login
             </button>
           </div>
