@@ -26,6 +26,10 @@ a {
   color: #00f5ff;
 }
 
-::-webkit-scrollbar{
+.active {
+  border: 2px solid;
+}
+
+::-webkit-scrollbar {
   display: none;
 }

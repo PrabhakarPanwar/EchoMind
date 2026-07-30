@@ -1,10 +1,9 @@
 import React from "react";
-import {useNavigate} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 function Sidebar({ open, setOpen }) {
 
-    const navigate = useNavigate()
 
   return (
     <>
@@ -97,33 +96,11 @@ function Sidebar({ open, setOpen }) {
           + New Chat
         </button>
 
-        {/* Search */}
-        <div className="flex gap-2 p-2 text-white border border-gray-700 rounded-md">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="M20 20L16.65 16.65" />
-          </svg>
-
-          <input
-            className="outline-none bg-transparent w-full"
-            type="text"
-            placeholder="Search Conversation"
-          />
-        </div>
-
         {/* Recent Chats */}
         <div className="text-white my-2">
-          <h4 className="font-medium mb-3">Recent Chats</h4>
+          <NavLink to="/history" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
+            <h1>Recent Chats</h1>
+          </NavLink>
 
           <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer">
             <p className="text-[14px] font-medium">
@@ -158,37 +135,16 @@ function Sidebar({ open, setOpen }) {
 
             <h1>Community Image</h1>
           </NavLink>
-          <NavLink to="/history" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="9" cy="9" r="2" />
-              <path d="M21 15l-5-5L5 21" />
-            </svg>
 
-            <h1>Recent Chats</h1>
+
+          <NavLink to="/login" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
+            <h1>Login</h1>
           </NavLink>
-
           <div className="text-white mt-4 flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
             <span>🌙 Dark Mode</span>
             <div className="w-12 h-6 bg-gray-600 rounded-full p-1 cursor-pointer transition-all duration-300">
               <div className="w-4 h-4 bg-white rounded-full"></div>
             </div>
-          </div>
-
-          <div className="my-4 text-[18px] font-medium rounded h-10 w-20 border border-gray-700 hover: px-3 py-1">
-            <button className="cursor-pointer outline-none" onClick={()=>navigate("/login")}> 
-              Login
-            </button>
           </div>
 
         </div>
