@@ -5,7 +5,7 @@ function Humburger({open, setOpen}) {
   return (
     <>
          {!open && (
-                <button onClick={()=>setOpen(true)} className="fixed top-4 left-4 z-50 cursor-pointer" >
+                <button onClick={()=>setOpen(true)} className=" " >
        <svg
   xmlns="http://www.w3.org/2000/svg"
   width="24"
