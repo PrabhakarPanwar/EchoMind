@@ -161,6 +161,12 @@ function Sidebar({ open, setOpen }) {
             </div>
           </div>
 
+          <div className="">
+            <button>
+              Login
+            </button>
+          </div>
+
         </div>
       </div>
     </>
