@@ -6,6 +6,7 @@ import Register from './page/Register';
 import History from './page/History';
 import Sidebar from './components/Sidebar'
 import Humburger from './components/Humburger'
+import Community from "./page/Community";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/community" element={<Community />} />
         <Route path="/register" element={<Register />} />
         <Route path="/history" element={<History />} />
       </Routes>

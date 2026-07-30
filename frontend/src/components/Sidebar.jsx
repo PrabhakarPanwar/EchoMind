@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Sidebar({ open, setOpen }) {
   return (
@@ -134,7 +135,7 @@ function Sidebar({ open, setOpen }) {
         {/* Bottom */}
         <div className="absolute bottom-6 left-2 right-2">
 
-          <div className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
+          <NavLink to="/community" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="22"
@@ -152,12 +153,31 @@ function Sidebar({ open, setOpen }) {
             </svg>
 
             <h1>Community Image</h1>
-          </div>
+          </NavLink>
+          <NavLink to="/history" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="9" cy="9" r="2" />
+              <path d="M21 15l-5-5L5 21" />
+            </svg>
+
+            <h1>Recent Chats</h1>
+          </NavLink>
 
           <div className="text-white mt-4 flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
             <span>🌙 Dark Mode</span>
             <div className="w-12 h-6 bg-gray-600 rounded-full p-1 cursor-pointer transition-all duration-300">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
+              <div className="w-4 h-4 bg-white rounded-full"></div>
             </div>
           </div>
 
