@@ -117,7 +117,7 @@ function Sidebar({ open, setOpen }) {
         </div>
 
         {/* Recent Chats */}
-        <div className="text-white my-6">
+        <div className="text-white my-2">
           <h4 className="font-medium mb-3">Recent Chats</h4>
 
           <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer">
