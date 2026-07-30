@@ -1,6 +1,6 @@
 import { generateReply } from "../config/connectGenAi.js";
 
-export const promptData = async (req, res) => {
+export const chatPrompt = async (req, res) => {
   const { prompt } = req.body;
   if (!prompt || !prompt.trim()) {
     return res.status(400).json({ message: "Prompt is required" });
@@ -15,4 +15,9 @@ export const promptData = async (req, res) => {
   }
 };
 
-export const regiseter = async (req, res) => {};
+export const imagePrompt = async (req, res) => {
+  
+};
+
+export const register = async (req, res) => {};
+export const login = async (req, res) => {};

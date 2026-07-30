@@ -1,8 +1,8 @@
 import express from "express";
-import { promptData } from "../controller/authContoller.js";
+import { chatPrompt } from "../controller/authContoller.js";
 
 const HomeRouter = express.Router();
 
-HomeRouter.post("/promptData", promptData);
+HomeRouter.post("/promptData", chatPrompt);
 
 export default HomeRouter;
