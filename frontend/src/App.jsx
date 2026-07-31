@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Route, Routes } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
 import Home from './page/Home';
 import Login from './page/Login';
 import Register from './page/Register';
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/history" element={<History />} />
       </Routes>
+      <ToastContainer />
     </div>
   )
 }
