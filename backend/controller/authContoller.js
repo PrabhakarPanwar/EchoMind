@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { generateReply } from "../config/connectGenAi.js";
 import { UserSM } from "./../models/User.js";
 
@@ -26,6 +27,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { pwd, email } = req.body;
+  const secretKey = process.env.SECRET_KEY;
 
   if (!pwd || !email) {
     return res.status(400).json({ error: "All fields are required" });
@@ -36,6 +38,15 @@ export const login = async (req, res) => {
   if (currentLog) {
     const match = await bcrypt.compare(pwd, currentLog.password);
     if (match) {
+      const token = await jwt.sign({ email }, secretKey, { expiresIn: "1hr" });
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.COOKIE_SECURE,
+        sameSite: process.env.COOKIE_SAMESITE,
+        maxAge: 60 * 60 * 1000,
+        path: "/",
+      });
+
       return res.status(200).json({
         message: "SuccessFully Login",
       });
@@ -45,7 +56,7 @@ export const login = async (req, res) => {
     });
   }
   return res.status(409).json({
-    error: "Incorrect Email",
+    error: "This Email is not Registered.Please Sign Up",
   });
 };
 
@@ -65,4 +76,3 @@ export const chatPrompt = async (req, res) => {
 };
 
 export const imagePrompt = async (req, res) => {};
-

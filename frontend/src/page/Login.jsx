@@ -19,7 +19,7 @@ function Login() {
     onSuccess: (data) => {
       toast.success(data.message)
       setTimeout(() => {
-        window.location.href = "/"  
+        window.location.href = "/"
       }, 2000);
     },
     onError: (error) => {
@@ -31,7 +31,7 @@ function Login() {
   })
 
   const handleSend = () => {
-    // if (isPending) return
+    if (isPending) return
     const obj = { email, pwd }
     mutate(obj)
   }
@@ -79,11 +79,17 @@ function Login() {
               />
             </div>
 
-            {isPending ? (<div>
-
-            </div>) :
-              (<button onClick={handleSend}
-                disabled={isPending} className="mt-4 h-10 w-full text-center cursor-pointer bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">Login</button>)}
+            <button
+              onClick={handleSend}
+              disabled={isPending}
+              className="mt-4 h-10 w-full flex items-center justify-center cursor-pointer bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden disabled:cursor-not-allowed"
+            >
+              {isPending ? (
+                <div className="h-5 w-5 border-2 border-zinc-500 border-t-white rounded-full animate-spin"></div>
+              ) : (
+                "Login"
+              )}
+            </button>
 
 
 

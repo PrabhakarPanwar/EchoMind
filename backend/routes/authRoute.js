@@ -1,5 +1,6 @@
 import express from "express";
 import { chatPrompt, login, register } from "../controller/authContoller.js";
+import verify from "../middleware/verify.js";
 
 const HomeRouter = express.Router();
 
