@@ -1,8 +1,40 @@
-import react from "react";
+import { useMutation } from "@tanstack/react-query";
+import react, { useState } from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../api/axios";
+import { toast } from "react-toastify";
 
 
 function Login() {
+
+  const [email, setEmail] = useState("")
+  const [pwd, setPwd] = useState("")
+
+  const { mutate, data, isPending, error } = useMutation({
+
+    mutationFn: async (obj) => {
+      const res = await axiosInstance.post("/login", obj);
+      return res.data
+    },
+    onSuccess: (data) => {
+      toast.success(data.message)
+      setTimeout(() => {
+        window.location.href = "/"  
+      }, 2000);
+    },
+    onError: (error) => {
+      const message = error.response?.data?.error
+        || "Something went wrong"
+      toast.error(message)
+    }
+
+  })
+
+  const handleSend = () => {
+    // if (isPending) return
+    const obj = { email, pwd }
+    mutate(obj)
+  }
 
   return (
     <div className="h-screen w-screen bg-[#0b0b0d] flex items-center justify-center px-4 overflow-hidden relative">
@@ -26,10 +58,11 @@ function Login() {
 
           {/* Email */}
           <div className="mt-10">
-            <label className="text-zinc-500 text-xs">Email</label>
 
             <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">
               <input
+                onChange={(i) => setEmail(i.target.value)}
+                disabled={isPending}
                 type="email"
                 placeholder="username@gmail.com"
                 className="flex-1 bg-transparent outline-none px-5 py-3 text-white placeholder:text-zinc-500"
@@ -38,13 +71,19 @@ function Login() {
 
             <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">
               <input
+                onChange={(i) => setPwd(i.target.value)}
+                disabled={isPending}
                 type="password"
                 placeholder="enter your password"
                 className="flex-1 bg-transparent outline-none px-5 py-3 text-white placeholder:text-zinc-500"
               />
             </div>
 
-            <button className="mt-4 h-10 w-full text-center cursor-pointer bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">Login</button>
+            {isPending ? (<div>
+
+            </div>) :
+              (<button onClick={handleSend}
+                disabled={isPending} className="mt-4 h-10 w-full text-center cursor-pointer bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">Login</button>)}
 
 
 
