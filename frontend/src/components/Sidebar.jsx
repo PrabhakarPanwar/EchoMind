@@ -8,9 +8,9 @@ import axiosInstance from "../../api/axios";
 
 function Sidebar({ open, setOpen }) {
 
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
-  const user = window.localStorage.getItem("name", name)
+  const userr = window.localStorage.getItem("name", name)
 
   const { mutate: logout, isPending: loggingOut } = useMutation({
     mutationFn: async () => {
@@ -169,7 +169,7 @@ function Sidebar({ open, setOpen }) {
               className="group w-full flex items-center gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47] disabled:opacity-50 transition-colors duration-200"
             >
               <span className="h-6 w-6 shrink-0 rounded-full bg-gradient-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
-                {user[0].toUpperCase()}
+                {userr[0].toUpperCase()}
               </span>
 
               <span className="text-sm truncate">
