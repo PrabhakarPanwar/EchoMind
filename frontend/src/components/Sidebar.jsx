@@ -1,10 +1,30 @@
 import React from "react";
 import { NavLink } from 'react-router-dom'
+import { useAuth } from './../../hook/useAuth';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from 'react-toastify';
+import axiosInstance from "../../api/axios";
 
 
 function Sidebar({ open, setOpen }) {
 
+  const { isAuthenticated } = useAuth();
+  const queryClient = useQueryClient();
+  const user = window.localStorage.getItem("name", name)
 
+  const { mutate: logout, isPending: loggingOut } = useMutation({
+    mutationFn: async () => {
+      const res = await axiosInstance.post("/logout");
+      return res.data;
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData(["auth", "me"], null);
+      toast.success(data?.message || "Logged out");
+    },
+    onError: () => {
+      toast.error("Something went wrong logging out");
+    },
+  });
   return (
     <>
       {/* Overlay */}
@@ -114,7 +134,7 @@ function Sidebar({ open, setOpen }) {
         </div>
 
         {/* Bottom */}
-        <div className="absolute bottom-6 left-2 right-2">
+        <div className="absolute flex flex-col gap-3 bottom-6 left-2 right-2">
 
           <NavLink to="/community" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
             <svg
@@ -135,19 +155,41 @@ function Sidebar({ open, setOpen }) {
 
             <h1>Community Image</h1>
           </NavLink>
-
-
-          <NavLink to="/login" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
-            <h1>Login</h1>
-          </NavLink>
-          <div className="text-white mt-4 flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
+          <div className="text-white flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
             <span>🌙 Dark Mode</span>
             <div className="w-12 h-6 bg-gray-600 rounded-full p-1 cursor-pointer transition-all duration-300">
               <div className="w-4 h-4 bg-white rounded-full"></div>
             </div>
+
           </div>
+          {isAuthenticated ? (
+            <button
+              onClick={() => logout()}
+              disabled={loggingOut}
+              className="group w-full flex items-center gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47] disabled:opacity-50 transition-colors duration-200"
+            >
+              <span className="h-6 w-6 shrink-0 rounded-full bg-gradient-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
+                {user[0].toUpperCase()}
+              </span>
+
+              <span className="text-sm truncate">
+                {loggingOut ? (
+                  "Logging out…"
+                ) : (
+                  <span className=" font-medium">
+                    Logout
+                  </span>
+                )}
+              </span>
+            </button>
+          ) : (
+            <NavLink to="/login" className="flex w-1/2 mx-auto gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer  hover:bg-[#1e2a47]">
+              <h1 className="mx-auto">Login</h1>
+            </NavLink>
+          )}
 
         </div>
+
       </div>
     </>
   );

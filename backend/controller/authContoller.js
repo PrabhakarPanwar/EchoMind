@@ -6,10 +6,6 @@ import { UserSM } from "./../models/User.js";
 export const register = async (req, res) => {
   const { name, pwd, email } = req.body;
 
-  if (!name || !pwd || !email) {
-    return res.status(400).json({ error: "All fields are required" });
-  }
-
   const currentReg = await UserSM.findOne({ email: email });
 
   if (currentReg) {
@@ -22,16 +18,13 @@ export const register = async (req, res) => {
   await UserSM.create({ name, password: hashPwd, email });
   return res.status(200).json({
     message: "Account created successfully. You can now sign in.",
+    name,
   });
 };
 
 export const login = async (req, res) => {
   const { pwd, email } = req.body;
   const secretKey = process.env.SECRET_KEY;
-
-  if (!pwd || !email) {
-    return res.status(400).json({ error: "All fields are required" });
-  }
 
   const currentLog = await UserSM.findOne({ email: email });
 
@@ -58,6 +51,19 @@ export const login = async (req, res) => {
   return res.status(409).json({
     error: "This Email is not Registered.Please Sign Up",
   });
+};
+
+export const authenticate = async (req, res) => {
+  return res.json({ user: req.user });
+};
+
+export const logout = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.COOKIE_SECURE,
+    sameSite: process.env.COOKIE_SAMESITE,
+  });
+  res.status(200).json({ message: "Logged out successfully" });
 };
 
 export const chatPrompt = async (req, res) => {

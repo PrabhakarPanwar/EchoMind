@@ -1,6 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import react, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 import { toast } from "react-toastify";
 
@@ -10,7 +10,10 @@ function Login() {
   const [email, setEmail] = useState("")
   const [pwd, setPwd] = useState("")
 
-  const { mutate, data, isPending, error } = useMutation({
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+
+  const { mutate, isPending } = useMutation({
 
     mutationFn: async (obj) => {
       const res = await axiosInstance.post("/login", obj);
@@ -18,9 +21,8 @@ function Login() {
     },
     onSuccess: (data) => {
       toast.success(data.message)
-      setTimeout(() => {
-        window.location.href = "/"
-      }, 2000);
+      queryClient.setQueryData(["auth", "me"], data.user);
+      navigate("/", { replace: true });
     },
     onError: (error) => {
       const message = error.response?.data?.error
@@ -32,8 +34,12 @@ function Login() {
 
   const handleSend = () => {
     if (isPending) return
-    const obj = { email, pwd }
-    mutate(obj)
+    if (!email || !pwd) {
+      toast.error("All fields are required");
+      return;
+    }
+
+    mutate({ email, pwd })
   }
 
   return (

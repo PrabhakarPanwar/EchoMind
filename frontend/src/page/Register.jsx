@@ -1,6 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import react from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 import { useState } from "react";
 import { toast } from 'react-toastify';
@@ -12,7 +12,10 @@ function Register() {
     const [email, setEmail] = useState("")
     const [pwd, setPwd] = useState("")
 
-    const { mutate, data, isPending, error } = useMutation({
+    const queryClient = useQueryClient()
+    const navigate = useNavigate()
+
+    const { mutate, isPending } = useMutation({
 
         mutationFn: async (obj) => {
             const res = await axiosInstance.post("/register", obj);
@@ -20,10 +23,8 @@ function Register() {
         },
         onSuccess: (data) => {
             toast.success(data.message)
-            setTimeout(() => {
-                window.localStorage.setItem("name", name)
-                window.location.href = "/login"
-            }, 2000);
+            window.localStorage.setItem("name", data.name)
+            navigate("/login", { replace: true });
         },
         onError: (error) => {
             const message = error.response?.data?.error
@@ -34,9 +35,12 @@ function Register() {
     })
 
     const handleSend = () => {
-        if (isPending) returns
-        const obj = { name, email, pwd }
-        mutate(obj)
+        if (isPending) return
+        if (!email || !pwd || !name) {
+            toast.error("All fields are required");
+            return;
+        }
+        mutate({ email, pwd, name })
     }
 
     return (
@@ -54,10 +58,10 @@ function Register() {
 
                 <div className="relative z-10">
                     <h1 className="text-5xl font-semibold text-white">
-                        Welcome <span className="text-zinc-400">back</span>
+                        Create <span className="text-zinc-400">account</span>
                     </h1>
 
-                    <p className="text-zinc-500 mt-2">Sign in to your account</p>
+                    <p className="text-zinc-500 mt-2">Sign up to get started</p>
 
                     {/* Email */}
                     <div className="mt-10">
@@ -67,7 +71,7 @@ function Register() {
                             <input
                                 onChange={(i) => setName(i.target.value)}
                                 disabled={isPending}
-                                type="name"
+                                type="text"
                                 placeholder="username"
                                 className="flex-1 bg-transparent outline-none px-5 py-3 text-white placeholder:text-zinc-500"
                             />
