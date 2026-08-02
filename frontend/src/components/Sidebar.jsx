@@ -7,7 +7,7 @@ import axiosInstance from "../../api/axios";
 
 
 function Sidebar({ open, setOpen }) {
-
+ 
   const { user, isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
   const userr = window.localStorage.getItem("name", name)
@@ -47,6 +47,7 @@ function Sidebar({ open, setOpen }) {
           p-2
           z-40
           transform transition-transform duration-300
+          backdrop-blur-3xl
           ${open ? "translate-x-0" : "-translate-x-full"}
         `}
       >
@@ -122,7 +123,7 @@ function Sidebar({ open, setOpen }) {
             <h1>Recent Chats</h1>
           </NavLink>
 
-          <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer">
+          <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer my-2">
             <p className="text-[14px] font-medium">
               How AI Works
             </p>
@@ -168,7 +169,7 @@ function Sidebar({ open, setOpen }) {
               disabled={loggingOut}
               className="group w-full flex items-center gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47] disabled:opacity-50 transition-colors duration-200"
             >
-              <span className="h-6 w-6 shrink-0 rounded-full bg-gradient-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
+              <span className="h-6 w-6 shrink-0 rounded-full bg-linear-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
                 {userr[0].toUpperCase()}
               </span>
 
