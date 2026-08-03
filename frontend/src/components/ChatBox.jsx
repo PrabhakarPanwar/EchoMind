@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import axiosInstance from '../../api/axios'
+import { assets } from './../assets/assets';
 
 function ChatBox() {
     const [prompt, setPrompt] = useState("")
     const [messages, setMessages] = useState([])
+    const theme = localStorage.getItem("theme") || "light"
     const controllerRef = useRef(null)
 
     const { mutate, isPending, error } = useMutation({
@@ -17,8 +19,8 @@ function ChatBox() {
         onSuccess: (data, userPrompt) => {
             setMessages((prev) => [
                 ...prev,
-                { role: 'user', text: userPrompt },
-                { role: 'ai', text: data.reply }
+                { role: 'user', content: userPrompt },
+                { role: 'ai', content: data.reply }
             ])
             setPrompt("")
         },
@@ -36,33 +38,43 @@ function ChatBox() {
 
 
     return (
-        <div className='flex flex-col items-center'>
-            {messages.length === 0 && !isPending && (
-                <div className='flex flex-col items-center text-center gap-3 px-5 pt-24 pb-10'>
-                    <h1 className='text-3xl lg:text-4xl font-semibold'>What's on your mind?</h1>
-                    <p className='text-gray-500 max-w-md'>
-                        Ask me anything — I can help you brainstorm, explain, write, or just talk things through.
-                    </p>
-                </div>
-            )}
+        <div className='flex flex-1 flex-col items-center justify-between m-5 md:m-10 xl:mx-30 max-md:mt-14 2xl:pr-40'>
+
+            <div className='flex-1 mb-5 overflow-y-scroll'>
+
+                {messages.length === 0 && !isPending && (
+                    <div className='h-full flex flex-col items-center justify-center gap-2 text-primary '>
+                        <img className='w-full max-w-56 sm:max-w-68' src={theme === "dark" ? assets.logo_full : assets.logo_full_dark} alt="" />
+                        <p className='mt-5 text-4xl sm:text-6xl leading-normal text-center text-gray-400 dark:text-white'>Ask me anything.</p>
+                    </div>
+                )}
+            </div>
 
             {/* Chat section */}
             <div className='flex mx-auto flex-col gap-6 p-5 w-[90%] lg:w-[60%] '>
                 {messages.map((msg, i) =>
                     msg.role === 'user' ? (
-                        <div key={i} className='w-fit max-w-[70%] ms-auto flex flex-row-reverse items-end gap-3'>
-                            <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>User</span>
-                            <div className='bg-amber-300/20 border border-amber-300/40 rounded-2xl rounded-br-sm px-4 py-2.5'>
-                                <p className='text-sm leading-relaxed'>{msg.text}</p>
+                        <div key={i} className='flex items-center justify-end my-4 gap-2'>
+                            <div className='flex   flex-col gap-2 p-2 px-4 bg-slate-50 dark:bg-[#57317C]/30 border border-[#80609F]/30 rounded-md max-w-2xl'>
+                                <p className='text-sm dark:text-primary'>{msg.content}</p>
+                                <span className='text-xs text-gray-400 dark:text-[#B1A6C0]'>{msg.timestamp}</span>
                             </div>
+                            <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>User</span>
                         </div>
                     ) : (
-                        <div key={i} className='w-full flex items-end gap-3'>
-                            <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>AI</span>
-                            <div className='rounded-2xl rounded-bl-sm px-4 py-2.5'>
-                                <p className='text-sm leading-relaxed whitespace-pre-wrap'>{msg.text}</p>
+                        <div className='flex flex-row-reverse items-center justify-end my-4 gap-2'>
+                            <div className='inline-flex flex-col gap-2 p-2 px-4 max-w-2xl bg-primary/20 dark:bg-[#57317C]/30 border border-[#80609F]/30 rounded-md my-4'>
+                                {msg.isImage ? (
+                                    <img className='w-full max-w-md mt-2 rounded-md' src={msg.content} alt="" />
+                                ) : (
+                                    <div className='text-sm dark:text-primary reset-tw'>{msg.content}
+                                    </div>
+                                )}
+                                <span>{msg.timestamp}</span>
                             </div>
+                            <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>AI</span>
                         </div>
+
                     )
                 )}
 
@@ -116,7 +128,7 @@ function ChatBox() {
                     </button>
                 )}
             </div>
-        </div>
+        </div >
     )
 }
 

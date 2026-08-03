@@ -1,0 +1,16 @@
+<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.796875" y="0.373047" width="44.8326" height="44.8326" rx="12" fill="url(#paint0_linear_echomind)"/>
+<circle cx="18" cy="23" r="3.4" fill="white"/>
+<circle cx="18" cy="23" r="9.2" stroke="white" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.85"/>
+<circle cx="18" cy="23" r="15.4" stroke="white" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.55"/>
+<circle cx="18" cy="23" r="21.6" stroke="white" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.28" clip-path="url(#clip_echomind)"/>
+<defs>
+<clipPath id="clip_echomind">
+<rect x="0.796875" y="0.373047" width="44.8326" height="44.8326" rx="12"/>
+</clipPath>
+<linearGradient id="paint0_linear_echomind" x1="51.6072" y1="16.8117" x2="-2.19197" y2="27.2726" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4080F6"/>
+<stop offset="1" stop-color="#A356F7"/>
+</linearGradient>
+</defs>
+</svg>

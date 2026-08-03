@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 import { useState } from "react";
 import { toast } from 'react-toastify';
+import { assets } from './../assets/assets';
 
 
 function Register() {
@@ -11,6 +12,7 @@ function Register() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [pwd, setPwd] = useState("")
+    const [seeThrough, setSeeThrough] = useState(false);
 
     const queryClient = useQueryClient()
     const navigate = useNavigate()
@@ -72,6 +74,8 @@ function Register() {
                                 onChange={(i) => setName(i.target.value)}
                                 disabled={isPending}
                                 type="text"
+                                value={name}
+                                minLength={2}
                                 placeholder="username"
                                 className="flex-1 bg-transparent outline-none px-5 py-3 text-white placeholder:text-zinc-500"
                             />
@@ -81,19 +85,31 @@ function Register() {
                                 onChange={(i) => setEmail(i.target.value)}
                                 disabled={isPending}
                                 type="email"
+                                value={email}
                                 placeholder="username@gmail.com"
                                 className="flex-1 bg-transparent outline-none px-5 py-3 text-white placeholder:text-zinc-500"
                             />
                         </div>
 
-                        <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">
+                        <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden relative">
                             <input
                                 onChange={(i) => setPwd(i.target.value)}
                                 disabled={isPending}
-                                type="password"
+                                type={seeThrough ? "text" : "password"}
+                                value={pwd}
+                                minLength={8}
+                                maxLength={16}
                                 placeholder="enter your password"
                                 className="flex-1 bg-transparent outline-none px-5 py-3 text-white placeholder:text-zinc-500"
                             />
+                            <div className="absolute right-4 ">
+
+                                {seeThrough ? (
+                                    <img className="invert cursor-pointer" onClick={() => setSeeThrough(false)} src={assets.eye} alt="" />
+                                ) : (
+                                    <img className="invert cursor-pointer" onClick={() => setSeeThrough(true)} src={assets.eye_off} alt="" />
+                                )}
+                            </div>
                         </div>
                         <button
                             onClick={handleSend}
