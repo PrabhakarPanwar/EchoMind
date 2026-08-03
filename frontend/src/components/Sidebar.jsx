@@ -7,7 +7,7 @@ import axiosInstance from "../../api/axios";
 
 
 function Sidebar({ open, setOpen }) {
- 
+
   const { user, isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
   const userr = window.localStorage.getItem("name", name)
@@ -119,6 +119,9 @@ function Sidebar({ open, setOpen }) {
 
         {/* Recent Chats */}
         <div className="text-white my-2">
+          <NavLink to="/credits" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
+            <h1>Credits</h1>
+          </NavLink>
           <NavLink to="/history" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
             <h1>Recent Chats</h1>
           </NavLink>

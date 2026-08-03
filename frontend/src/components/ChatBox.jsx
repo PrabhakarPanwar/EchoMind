@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import axiosInstance from '../../api/axios'
 
 function ChatBox() {
     const [prompt, setPrompt] = useState("")
     const [messages, setMessages] = useState([])
+    const controllerRef = useRef(null)
 
     const { mutate, isPending, error } = useMutation({
 
         mutationFn: async (userPrompt) => {
-            const res = await axiosInstance.post("/promptData", { prompt: userPrompt })
+            controllerRef.current = new AbortController()
+            const res = await axiosInstance.post("/promptData", { prompt: userPrompt }, { signal: controllerRef.current.signal })
             return res.data;
         },
         onSuccess: (data, userPrompt) => {
@@ -28,6 +30,11 @@ function ChatBox() {
         mutate(prompt)
     }
 
+    const handleStop = () => {
+        controllerRef.current?.abort()
+    }
+
+
     return (
         <div className='flex flex-col items-center'>
             {messages.length === 0 && !isPending && (
@@ -40,7 +47,7 @@ function ChatBox() {
             )}
 
             {/* Chat section */}
-            <div className='flex mx-auto flex-col gap-6 p-5 w-[85%] lg:w-[60%] '>
+            <div className='flex mx-auto flex-col gap-6 p-5 w-[90%] lg:w-[60%] '>
                 {messages.map((msg, i) =>
                     msg.role === 'user' ? (
                         <div key={i} className='w-fit max-w-[70%] ms-auto flex flex-row-reverse items-end gap-3'>
@@ -50,7 +57,7 @@ function ChatBox() {
                             </div>
                         </div>
                     ) : (
-                        <div key={i} className='w-fit max-w-[80%] flex items-end gap-3'>
+                        <div key={i} className='w-full flex items-end gap-3'>
                             <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>AI</span>
                             <div className='rounded-2xl rounded-bl-sm px-4 py-2.5'>
                                 <p className='text-sm leading-relaxed whitespace-pre-wrap'>{msg.text}</p>
@@ -94,12 +101,20 @@ function ChatBox() {
                     disabled={isPending}
                     className='flex-1 bg-transparent outline-none text-white placeholder:text-gray-500 disabled:opacity-50'
                 />
-                <button onClick={handleSend} disabled={isPending} className='text-white hover:text-gray-300 transition-colors disabled:opacity-50'>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button>
+                {isPending ? (
+                    <button onClick={handleStop} className='text-white hover:text-gray-300 transition-colors'>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
+                ) : (
+                    <button onClick={handleSend} className="text-white hover:text-gray-300 transition-colors">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
+                )}
             </div>
         </div>
     )
