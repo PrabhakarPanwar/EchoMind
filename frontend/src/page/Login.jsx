@@ -34,8 +34,8 @@ function Login() {
 
   })
 
-  const handleSend = () => {
-    if (isPending) return
+  const handleSend = async (e) => {
+    e.preventDefault();
     if (!email || !pwd) {
       toast.error("All fields are required");
       return;
@@ -65,7 +65,7 @@ function Login() {
           <p className="text-zinc-500 mt-2">Sign in to your account</p>
 
           {/* Email */}
-          <div className="mt-10">
+          <form onSubmit={handleSend} className="my-10">
 
             <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">
               <input
@@ -99,7 +99,7 @@ function Login() {
             </div>
 
             <button
-              onClick={handleSend}
+              type="submit"
               disabled={isPending}
               className="mt-4 h-10 w-full flex items-center justify-center cursor-pointer bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden disabled:cursor-not-allowed"
             >
@@ -112,7 +112,7 @@ function Login() {
 
 
 
-          </div>
+          </form>
 
           {/* Divider */}
 

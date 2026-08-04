@@ -36,7 +36,8 @@ function Register() {
 
     })
 
-    const handleSend = () => {
+    const handleSend = async (e) => {
+        e.preventDefault();
         if (isPending) return
         if (!email || !pwd || !name) {
             toast.error("All fields are required");
@@ -66,7 +67,7 @@ function Register() {
                     <p className="text-zinc-500 mt-2">Sign up to get started</p>
 
                     {/* Email */}
-                    <div className="mt-10">
+                    <form onSubmit={handleSend} className="my-10">
 
 
                         <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">
@@ -112,7 +113,7 @@ function Register() {
                             </div>
                         </div>
                         <button
-                            onClick={handleSend}
+                            type="submit"
                             disabled={isPending}
                             className="mt-4 h-10 w-full flex items-center justify-center cursor-pointer bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden disabled:cursor-not-allowed"
                         >
@@ -125,7 +126,7 @@ function Register() {
 
 
 
-                    </div>
+                    </form>
 
                     {/* Divider */}
 
