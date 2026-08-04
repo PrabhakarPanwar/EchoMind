@@ -31,7 +31,7 @@ function Sidebar({ open, setOpen }) {
       {open && (
         <div
           onClick={() => setOpen(false)}
-          className="fixed inset-0 bg-black/50 z-30 "
+          className="fixed inset-0 bg-black/50 z-30"
         ></div>
       )}
 
@@ -47,7 +47,6 @@ function Sidebar({ open, setOpen }) {
           p-2
           z-40
           transform transition-transform duration-300
-          backdrop-blur-3xl
           ${open ? "translate-x-0" : "-translate-x-full"}
         `}
       >
