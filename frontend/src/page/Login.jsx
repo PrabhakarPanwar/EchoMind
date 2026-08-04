@@ -3,12 +3,14 @@ import react, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 import { toast } from "react-toastify";
+import { assets } from "../assets/assets";
 
 
 function Login() {
 
   const [email, setEmail] = useState("")
   const [pwd, setPwd] = useState("")
+  const [seeThrough, setSeeThrough] = useState(false);
 
   const queryClient = useQueryClient()
   const navigate = useNavigate()
@@ -32,8 +34,8 @@ function Login() {
 
   })
 
-  const handleSend = () => {
-    if (isPending) return
+  const handleSend = async (e) => {
+    e.preventDefault();
     if (!email || !pwd) {
       toast.error("All fields are required");
       return;
@@ -63,30 +65,41 @@ function Login() {
           <p className="text-zinc-500 mt-2">Sign in to your account</p>
 
           {/* Email */}
-          <div className="mt-10">
+          <form onSubmit={handleSend} className="my-10">
 
             <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">
               <input
                 onChange={(i) => setEmail(i.target.value)}
                 disabled={isPending}
                 type="email"
+                value={email}
                 placeholder="username@gmail.com"
                 className="flex-1 bg-transparent outline-none px-5 py-3 text-white placeholder:text-zinc-500"
               />
             </div>
 
-            <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden">
+            <div className="mt-2 flex items-center bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden relative">
               <input
                 onChange={(i) => setPwd(i.target.value)}
                 disabled={isPending}
-                type="password"
+                type={seeThrough ? "text" : "password"}
+                value={pwd}
+                minLength={8}
+                maxLength={16}
                 placeholder="enter your password"
                 className="flex-1 bg-transparent outline-none px-5 py-3 text-white placeholder:text-zinc-500"
               />
+              <div className="absolute right-4">
+                {seeThrough ? (
+                  <img className="invert cursor-pointer" onClick={() => setSeeThrough(false)} src={assets.eye} alt="" />
+                ) : (
+                  <img className="invert cursor-pointer" onClick={() => setSeeThrough(true)} src={assets.eye_off} alt="" />
+                )}
+              </div>
             </div>
 
             <button
-              onClick={handleSend}
+              type="submit"
               disabled={isPending}
               className="mt-4 h-10 w-full flex items-center justify-center cursor-pointer bg-[#1a1a1d] border border-zinc-700 rounded-full overflow-hidden disabled:cursor-not-allowed"
             >
@@ -99,7 +112,7 @@ function Login() {
 
 
 
-          </div>
+          </form>
 
           {/* Divider */}
 

@@ -74,6 +74,7 @@ export const chatPrompt = async (req, res) => {
 
   try {
     const reply = await generateReply(prompt);
+    console.log({reply});
     res.json({ reply });
   } catch (err) {
     console.error(err);
