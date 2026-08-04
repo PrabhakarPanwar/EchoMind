@@ -17,7 +17,7 @@ function App() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-[95%]">
+    <div >
       <Humburger open={open} setOpen={setOpen} />
       <Sidebar open={open} setOpen={setOpen} />
       <Routes>

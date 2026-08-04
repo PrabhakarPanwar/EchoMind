@@ -4,6 +4,7 @@ import { useAuth } from './../../hook/useAuth';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
 import axiosInstance from "../../api/axios";
+import { assets } from "../assets/assets";
 
 
 function Sidebar({ open, setOpen }) {
@@ -74,35 +75,9 @@ function Sidebar({ open, setOpen }) {
 
         {/* Chat Icon */}
         <div className="flex gap-2 p-4 mt-8 md:mt-0">
-          <span className="h-10 w-10 rounded-[10px] p-2 bg-linear-to-br from-[#916CFB] via-[#7C70FA] to-[#5A76FD]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M4 20L20 4" />
-              <path d="M18 2L19 4L21 5L19 6L18 8L17 6L15 5L17 4Z" />
-              <path d="M6 4V6" />
-              <path d="M5 5H7" />
-              <path d="M18 14V16" />
-              <path d="M17 15H19" />
-            </svg>
-          </span>
 
-          <div>
-            <h1 className="text-[22px] font-bold text-white">
-              Quick GPT
-            </h1>
-            <p className="text-[14px] font-medium text-[#94a3b8]">
-              Intelligent AI Assistant
-            </p>
-          </div>
+          <img className="w-full" src={assets.logo_full} alt="" />
+
         </div>
 
         {/* New Chat */}
