@@ -8,7 +8,6 @@ import History from './page/History';
 import Sidebar from './components/Sidebar'
 import Humburger from './components/Humburger'
 import Community from "./page/Community";
-import Credit from './page/Credit'
 
 function App() {
   
@@ -26,7 +25,7 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/register" element={<Register />} />
         <Route path="/history" element={<History />} />
-        <Route path="/credit" element={<Credit />} />
+      
       </Routes>
       <ToastContainer />
     </div>
