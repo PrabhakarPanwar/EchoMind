@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { UserSM } from "../models/User.js";
 
 const verify = async (req, res, next) => {
   const token = req.cookies.token;
@@ -9,7 +10,17 @@ const verify = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    req.user = decoded;
+    const Userid = decoded.userId;
+    const user = await UserSM.findById(Userid);
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Not authorized,user not found",
+      });
+    }
+
+    req.user = user;
     next();
   } catch (err) {
     if (err.name === "TokenExpiredError") {

@@ -15,7 +15,9 @@ export const register = async (req, res) => {
   }
 
   const hashPwd = await bcrypt.hash(pwd, 10);
+
   await UserSM.create({ name, password: hashPwd, email });
+
   return res.status(200).json({
     message: "Account created successfully. You can now sign in.",
     name,
@@ -24,14 +26,19 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { pwd, email } = req.body;
+
   const secretKey = process.env.SECRET_KEY;
 
   const currentLog = await UserSM.findOne({ email: email });
 
   if (currentLog) {
     const match = await bcrypt.compare(pwd, currentLog.password);
+    const userId = currentLog.id;
     if (match) {
-      const token = await jwt.sign({ email }, secretKey, { expiresIn: "1hr" });
+      const token = await jwt.sign({ userId }, secretKey, {
+        expiresIn: "1hr",
+      });
+
       res.cookie("token", token, {
         httpOnly: true,
         secure: process.env.COOKIE_SECURE,
@@ -54,7 +61,9 @@ export const login = async (req, res) => {
 };
 
 export const authenticate = async (req, res) => {
-  return res.json({ user: req.user });
+  const user = req.user;
+  console.log(user);
+  return res.json({ user });
 };
 
 export const logout = (req, res) => {

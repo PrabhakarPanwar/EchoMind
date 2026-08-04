@@ -26,7 +26,8 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/register" element={<Register />} />
         <Route path="/history" element={<History />} />
-      
+        <Route path="/credits" element={<Credits />} />
+
       </Routes>
       <ToastContainer />
     </div>

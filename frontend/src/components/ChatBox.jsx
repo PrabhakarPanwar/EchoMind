@@ -6,7 +6,7 @@ import { assets } from './../assets/assets';
 function ChatBox() {
     const [prompt, setPrompt] = useState("")
     const [messages, setMessages] = useState([])
-    const theme = localStorage.getItem("theme") || "light"
+    const theme = localStorage.getItem("theme") || "dark"
     const controllerRef = useRef(null)
 
     const { mutate, isPending, error } = useMutation({
@@ -44,7 +44,7 @@ function ChatBox() {
 
                 {messages.length === 0 && !isPending && (
                     <div className='h-full flex flex-col items-center justify-center gap-2 text-primary '>
-                        <img className='w-full max-w-56 sm:max-w-68' src={theme === "dark" ? assets.logo_full_dark : assets.logo_full} alt="" />
+                        <img className='w-full max-w-56 sm:max-w-68' src={theme === "dark" ? assets.logo_full : assets.logo_full_dark} alt="" />
                         <p className='mt-5 text-4xl sm:text-6xl leading-normal text-center text-white '>Ask me anything.</p>
                     </div>
                 )}

@@ -8,7 +8,8 @@ import HomeRouter from "./routes/authRoute.js";
 const allowedOrigins = process.env.ALLOWED_ORIGIN;
 
 const app = express();
-connect();
+await connect();
+
 app.use(
   cors({
     origin: function (origin, callback) {

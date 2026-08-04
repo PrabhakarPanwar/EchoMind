@@ -1,24 +1,19 @@
-import { useQuery } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import React from 'react'
+import { dummyPlans } from '../assets/assets'
+
 
 function Credits() {
-    const [plans, setPlans] = useState([])
-    // const { data, isPending } = useQuery({
-    //     queryFn: fetchPlans = () => {
-    //         setPlans(dummyPlans)
-    //     }
-    // })
 
-    // if (isPending) return <div></div>
+
     return (
         <div className='max-w-7xl h-screen overflow-y-scroll mx-auto px-4 sm:px-6 lg:px-8 py-12 '>
             <h2 className='text-3xl font-semibold text-center mb-10 xl:mt-30 text-grey-800 dark:text-white'>Credits Plans</h2>
             <div className='flex flex-wrap justify-center gap-8'>
-                {plans.map(() => (
+                {dummyPlans.map((plans) => (
                     <div key={plans._id} className={`border border-gray-200 dark:border-purple-700 rounded-lg shadow hover:shadow-lg transition-shadow p-6 min-w-[300px] flex flex-col ${plans._id === "pro" ? "bg-purple-50 dark:bg-purple-900" : "bg-white dark:bg-transparent"}`}>
                         <div className='flex-1'>
                             <h3 className='text-xl font-semibold text-gray-900 dark:text-white mb-2'>{plans.name}</h3>
-                            <p className='text-2xl font-bold text-purple-600 dark:text-purple-300 mb-4'>₹ {plans.price}
+                            <p className='text-2xl font-bold text-purple-600 dark:text-purple-300 mb-4'>₹{plans.price}
                                 <span className='text-base font-normal text-gray-600 dark:text-purple-200'>/{plans.credits} credits</span>
                             </p>
                             <ul className='list-disc list-inside text-sm text-gray-700 dark:text-purple-200 space-y-1'>{plans.features.map((feature, index) => (
