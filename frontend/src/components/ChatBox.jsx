@@ -44,8 +44,8 @@ function ChatBox() {
 
                 {messages.length === 0 && !isPending && (
                     <div className='h-full flex flex-col items-center justify-center gap-2 text-primary '>
-                        <img className='w-full max-w-56 sm:max-w-68' src={theme === "dark" ? assets.logo_full : assets.logo_full_dark} alt="" />
-                        <p className='mt-5 text-4xl sm:text-6xl leading-normal text-center text-gray-400 dark:text-white'>Ask me anything.</p>
+                        <img className='w-full max-w-56 sm:max-w-68' src={theme === "dark" ? assets.logo_full_dark : assets.logo_full} alt="" />
+                        <p className='mt-5 text-4xl sm:text-6xl leading-normal text-center text-white '>Ask me anything.</p>
                     </div>
                 )}
             </div>
@@ -54,15 +54,15 @@ function ChatBox() {
             <div className='flex mx-auto flex-col gap-6 p-5 w-[90%] lg:w-[60%] '>
                 {messages.map((msg, i) =>
                     msg.role === 'user' ? (
-                        <div key={i} className='flex items-center justify-end my-4 gap-2'>
-                            <div className='flex   flex-col gap-2 p-2 px-4 bg-slate-50 dark:bg-[#57317C]/30 border border-[#80609F]/30 rounded-md max-w-2xl'>
+                        <div key={i} className='flex items-start justify-end my-4 gap-2'>
+                            <div className='flex   flex-col gap-2 p-2 px-4  dark:bg-[#57317C]/30 border border-[#80609F]/30 rounded-md max-w-2xl'>
                                 <p className='text-sm dark:text-primary'>{msg.content}</p>
                                 <span className='text-xs text-gray-400 dark:text-[#B1A6C0]'>{msg.timestamp}</span>
                             </div>
                             <span className='shrink-0 rounded-full border-amber-300 border-2 w-9 h-9 flex items-center justify-center text-xs font-medium'>User</span>
                         </div>
                     ) : (
-                        <div className='flex flex-row-reverse items-center justify-end my-4 gap-2'>
+                        <div className='flex flex-row-reverse items-start justify-end my-4 gap-2'>
                             <div className='inline-flex flex-col gap-2 p-2 px-4 max-w-2xl bg-primary/20 dark:bg-[#57317C]/30 border border-[#80609F]/30 rounded-md my-4'>
                                 {msg.isImage ? (
                                     <img className='w-full max-w-md mt-2 rounded-md' src={msg.content} alt="" />
@@ -98,10 +98,7 @@ function ChatBox() {
 
             <div className='w-fit lg:w-[30%] p-5 bg-black rounded-full flex items-center gap-3'>
                 <button className='text-white hover:text-gray-300 transition-colors'>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 5V19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <img className='invert' src={assets.add_button} alt="" />
                 </button>
                 <input
                     value={prompt}
@@ -115,16 +112,11 @@ function ChatBox() {
                 />
                 {isPending ? (
                     <button onClick={handleStop} className='text-white hover:text-gray-300 transition-colors'>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+                        <img className='invert' src={assets.pause_button} alt="" />
                     </button>
                 ) : (
                     <button onClick={handleSend} className="text-white hover:text-gray-300 transition-colors">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+                        <img className='invert' src={assets.send_button} alt="" />
                     </button>
                 )}
             </div>

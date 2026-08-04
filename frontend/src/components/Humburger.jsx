@@ -1,5 +1,5 @@
 import React from 'react'
-import { MenuIcon } from '../assets/svg.jsx'
+import { assets } from '../assets/assets.js';
 
 function Humburger({ open, setOpen }) {
 
@@ -10,7 +10,7 @@ function Humburger({ open, setOpen }) {
           className="fixed top-3 left-3 z-50 text-white"
           onClick={() => setOpen(true)}
         >
-          <MenuIcon />
+          <img className='invert' src={assets.menu_icon} alt="" />
         </button>
       )}
     </>

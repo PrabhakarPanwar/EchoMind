@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
-import { GoogleIcon, ArrowRightIcon } from "../assets/svg.jsx";
 
 function Login() {
 
@@ -132,13 +131,13 @@ function Login() {
 
           <button className="w-full flex items-center justify-between px-5 py-3 rounded-full border border-zinc-700 bg-[#18181b] hover:bg-[#202024] duration-300">
             <div className="flex items-center gap-3">
-              <GoogleIcon />
+              <img src={assets.google_icon} alt="" />
 
               <span className="text-zinc-300 text-sm">
                 Continue with Google
               </span>
             </div>
-            <ArrowRightIcon />
+            <img src={assets.arrow_right_icon} alt="" />
           </button>
 
           {/* Footer */}

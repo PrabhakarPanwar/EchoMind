@@ -5,7 +5,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
 import axiosInstance from "../../api/axios";
 import { assets } from "../assets/assets";
-import { CloseIcon, ImageIcon } from "../assets/svg.jsx";
 
 
 function Sidebar({ open, setOpen }) {
@@ -57,7 +56,7 @@ function Sidebar({ open, setOpen }) {
           className="absolute top-4 right-4 text-white "
           onClick={() => setOpen(false)}
         >
-          <CloseIcon />
+          <img className='invert' src={assets.close_icon} alt="" />
         </button>
 
         {/* Chat Icon */}
@@ -105,7 +104,7 @@ function Sidebar({ open, setOpen }) {
             to="/community"
             className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
           >
-            <ImageIcon />
+            <img className='invert' src={assets.image_icon} alt="" />
             <h1>Community Image</h1>
           </NavLink>
           <div className="text-white flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">

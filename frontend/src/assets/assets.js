@@ -4,17 +4,20 @@ import logo_full_dark from "./logo_full_dark.svg";
 import search_icon from "./search_icon.svg";
 import user_icon from "./user_icon.svg";
 import theme_icon from "./theme_icon.svg";
-import send_icon from "./send_icon.svg";
-import stop_icon from "./stop_icon.svg";
 import mountain_img from "./mountain_img.jpg";
 import menu_icon from "./menu_icon.svg";
 import close_icon from "./close_icon.svg";
-import bin_icon from "./bin_icon.svg";
-import logout_icon from "./logout_icon.svg";
 import diamond_icon from "./diamond_icon.svg";
 import gallery_icon from "./gallery_icon.svg";
 import eye from "./eye.svg";
 import eye_off from "./eye_off.svg";
+import pause_button from "./pause_button.svg";
+import send_button from "./send_button.svg";
+import add_button from "./add_button.svg";
+import google_icon from "./google_icon.svg";
+import arrow_right_icon from "./arrow_right_icon.svg";
+import image_icon from "./image_icon.svg";
+import bin_icon from "./bin_icon.svg";
 
 import ai_image1 from "./ai_image1.jpg";
 import ai_image2 from "./ai_image2.jpg";
@@ -35,18 +38,21 @@ export const assets = {
   search_icon,
   user_icon,
   theme_icon,
-  send_icon,
-  stop_icon,
   mountain_img,
   menu_icon,
   close_icon,
   bin_icon,
-  logout_icon,
   logo_full_dark,
   diamond_icon,
   gallery_icon,
   eye,
   eye_off,
+  pause_button,
+  send_button,
+  add_button,
+  arrow_right_icon,
+  google_icon,
+  image_icon,
 };
 
 export const dummyUserData = {
