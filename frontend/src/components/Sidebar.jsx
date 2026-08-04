@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
 import axiosInstance from "../../api/axios";
 import { assets } from "../assets/assets";
+import { CloseIcon, ImageIcon } from "../assets/svg.jsx";
 
 
 function Sidebar({ open, setOpen }) {
@@ -56,27 +57,12 @@ function Sidebar({ open, setOpen }) {
           className="absolute top-4 right-4 text-white "
           onClick={() => setOpen(false)}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M18 6L6 18" />
-            <path d="M6 6L18 18" />
-          </svg>
+          <CloseIcon />
         </button>
 
         {/* Chat Icon */}
         <div className="flex gap-2 p-4 mt-8 md:mt-0">
-
           <img className="w-full" src={assets.logo_full} alt="" />
-
         </div>
 
         {/* New Chat */}
@@ -93,44 +79,33 @@ function Sidebar({ open, setOpen }) {
 
         {/* Recent Chats */}
         <div className="text-white my-2">
-          <NavLink to="/credits" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
+          <NavLink
+            to="/credits"
+            className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
+          >
             <h1>Credits</h1>
           </NavLink>
-          <NavLink to="/history" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
+          <NavLink
+            to="/history"
+            className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
+          >
             <h1>Recent Chats</h1>
           </NavLink>
 
           <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer my-2">
-            <p className="text-[14px] font-medium">
-              How AI Works
-            </p>
+            <p className="text-[14px] font-medium">How AI Works</p>
 
-            <p className="text-[12px] text-gray-400">
-              1 min ago
-            </p>
+            <p className="text-[12px] text-gray-400">1 min ago</p>
           </div>
         </div>
 
         {/* Bottom */}
         <div className="absolute flex flex-col gap-3 bottom-6 left-2 right-2">
-
-          <NavLink to="/community" className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="9" cy="9" r="2" />
-              <path d="M21 15l-5-5L5 21" />
-            </svg>
-
+          <NavLink
+            to="/community"
+            className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
+          >
+            <ImageIcon />
             <h1>Community Image</h1>
           </NavLink>
           <div className="text-white flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
@@ -138,7 +113,6 @@ function Sidebar({ open, setOpen }) {
             <div className="w-12 h-6 bg-gray-600 rounded-full p-1 cursor-pointer transition-all duration-300">
               <div className="w-4 h-4 bg-white rounded-full"></div>
             </div>
-
           </div>
           {isAuthenticated ? (
             <button
@@ -154,20 +128,19 @@ function Sidebar({ open, setOpen }) {
                 {loggingOut ? (
                   "Logging out…"
                 ) : (
-                  <span className=" font-medium">
-                    Logout
-                  </span>
+                  <span className=" font-medium">Logout</span>
                 )}
               </span>
             </button>
           ) : (
-            <NavLink to="/login" className="flex w-1/2 mx-auto gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer  hover:bg-[#1e2a47]">
+            <NavLink
+              to="/login"
+              className="flex w-1/2 mx-auto gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer  hover:bg-[#1e2a47]"
+            >
               <h1 className="mx-auto">Login</h1>
             </NavLink>
           )}
-
         </div>
-
       </div>
     </>
   );
