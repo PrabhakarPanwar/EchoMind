@@ -9,10 +9,9 @@ import { assets } from "../assets/assets";
 
 function Sidebar({ open, setOpen }) {
 
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isPending } = useAuth();
   const queryClient = useQueryClient();
-  const userr = window.localStorage.getItem("name", name)
-
+  console.log(user)
   const { mutate: logout, isPending: loggingOut } = useMutation({
     mutationFn: async () => {
       const res = await axiosInstance.post("/logout");
@@ -53,7 +52,7 @@ function Sidebar({ open, setOpen }) {
       >
         {/* Close Button */}
         <button
-          className="absolute top-4 right-4 text-white "
+          className="absolute top-4 right-4  "
           onClick={() => setOpen(false)}
         >
           <img className='invert' src={assets.close_icon} alt="" />
@@ -66,7 +65,7 @@ function Sidebar({ open, setOpen }) {
 
         {/* New Chat */}
         <button
-          className="rounded-md text-white font-bold my-8 w-full h-10
+          className="rounded-md  font-bold my-8 w-full h-10
           bg-linear-to-br from-[#916CFB] via-[#7C70FA] to-[#5A76FD]
           hover:from-[#A78BFA]
           hover:via-[#8B5CF6]
@@ -76,22 +75,22 @@ function Sidebar({ open, setOpen }) {
           + New Chat
         </button>
 
-        {/* Recent Chats */}
-        <div className="text-white my-2">
+        {/* tabs -> credit,recent*/}
+        <div className=" my-2 flex flex-col gap-2">
           <NavLink
             to="/credits"
-            className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
+            className="flex gap-2 p-2  border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
           >
             <h1>Credits</h1>
           </NavLink>
           <NavLink
             to="/history"
-            className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
+            className="flex gap-2 p-2  border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
           >
             <h1>Recent Chats</h1>
           </NavLink>
 
-          <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer my-2">
+          <div className="border border-gray-700 rounded-md p-3 hover:bg-[#1e2a47] cursor-pointer">
             <p className="text-[14px] font-medium">How AI Works</p>
 
             <p className="text-[12px] text-gray-400">1 min ago</p>
@@ -102,43 +101,49 @@ function Sidebar({ open, setOpen }) {
         <div className="absolute flex flex-col gap-3 bottom-6 left-2 right-2">
           <NavLink
             to="/community"
-            className="flex gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
+            className="flex gap-2 p-2  border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47]"
           >
             <img className='invert' src={assets.image_icon} alt="" />
             <h1>Community Image</h1>
           </NavLink>
-          <div className="text-white flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
+          <div className=" flex gap-2 border border-gray-700 rounded-md p-2 cursor-pointer hover:bg-[#1e2a47]">
             <span>🌙 Dark Mode</span>
             <div className="w-12 h-6 bg-gray-600 rounded-full p-1 cursor-pointer transition-all duration-300">
               <div className="w-4 h-4 bg-white rounded-full"></div>
             </div>
           </div>
-          {isAuthenticated ? (
-            <button
-              onClick={() => logout()}
-              disabled={loggingOut}
-              className="group w-full flex items-center gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47] disabled:opacity-50 transition-colors duration-200"
-            >
-              <span className="h-6 w-6 shrink-0 rounded-full bg-linear-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
-                {userr[0].toUpperCase()}
-              </span>
+          {isPending ? (
+            <div className="h-9 w-full animate-pulse rounded-md bg-gray-700" />
+          ) :
+            isAuthenticated ? (
+              <button
+                onClick={() => logout()}
+                disabled={loggingOut}
+                className="group w-full flex items-center gap-2 p-2  border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47] disabled:opacity-50 transition-colors duration-200"
+              >
+                <span className="h-6 w-6 shrink-0 rounded-full bg-linear-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
+                  {user.name[0].toUpperCase()}
+                </span>
 
-              <span className="text-sm truncate">
-                {loggingOut ? (
-                  "Logging out…"
-                ) : (
-                  <span className=" font-medium">Logout</span>
-                )}
-              </span>
-            </button>
-          ) : (
-            <NavLink
-              to="/login"
-              className="flex w-1/2 mx-auto gap-2 p-2 text-white border border-gray-700 rounded-md cursor-pointer  hover:bg-[#1e2a47]"
-            >
-              <h1 className="mx-auto">Login</h1>
-            </NavLink>
-          )}
+                <span className="text-sm truncate">
+                  {loggingOut ? (
+                    "Logging out…"
+                  ) : (
+                    <span className=" font-medium">Logout</span>
+                  )}
+                </span>
+              </button>
+            ) : (
+              <NavLink
+                to="/login"
+                className="flex w-1/2 mx-auto gap-2 p-2  border border-gray-700 rounded-md cursor-pointer  hover:bg-[#1e2a47]"
+              >
+                <span className="h-6 w-6 shrink-0 rounded-full bg-linear-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
+                  G
+                </span>
+                <h1 className="mx-auto">Login</h1>
+              </NavLink>
+            )}
         </div>
       </div>
     </>

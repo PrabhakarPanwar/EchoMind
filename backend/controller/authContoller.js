@@ -62,7 +62,6 @@ export const login = async (req, res) => {
 
 export const authenticate = async (req, res) => {
   const user = req.user;
-  console.log(user);
   return res.json({ user });
 };
 

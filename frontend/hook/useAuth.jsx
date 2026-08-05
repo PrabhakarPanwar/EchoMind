@@ -4,7 +4,7 @@ import axiosInstance from "../api/axios";
 export function useAuth() {
   const {
     data: user,
-    isLoading,
+    isPending,
     isError,
   } = useQuery({
     queryKey: ["auth", "me"],
@@ -14,7 +14,7 @@ export function useAuth() {
         return res.data.user
       } catch (err) {
         if (err.response?.status === 401) {
-          return null;
+          return null
         }
         throw err;
       }
@@ -23,5 +23,5 @@ export function useAuth() {
     retry: false,
     refetchOnWindowFocus: false,
   })
-  return { user, isLoading, isAuthenticated: !!user }
+  return { user, isPending, isError, isAuthenticated: !!user, isGuest: !user && !isPending && !isError };
 }
