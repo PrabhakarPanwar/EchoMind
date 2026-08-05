@@ -9,10 +9,10 @@ import { assets } from "../assets/assets";
 
 function Sidebar({ open, setOpen }) {
 
-  const { user, isAuthenticated, isPending } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
+
   const queryClient = useQueryClient();
-  console.log(user)
-  const { mutate: logout, isPending: loggingOut } = useMutation({
+  const { mutate: logout, isPending } = useMutation({
     mutationFn: async () => {
       const res = await axiosInstance.post("/logout");
       return res.data;
@@ -25,6 +25,9 @@ function Sidebar({ open, setOpen }) {
       toast.error("Something went wrong logging out");
     },
   });
+
+
+
   return (
     <>
       {/* Overlay */}
@@ -58,7 +61,19 @@ function Sidebar({ open, setOpen }) {
           <img className='invert' src={assets.close_icon} alt="" />
         </button>
 
+        <>
+          {isLoading ? ("Fetching data") :
+            <div className="flex m-2 gap-2">
+              <p className="h-6 w-6 shrink-0 rounded-full bg-linear-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
+                {isAuthenticated ? user.name[0].toUpperCase() : "G"}
+              </p>
+              <p> {isAuthenticated ? user.name : "Guest"}</p>
+            </div>
+          }
+        </>
+
         {/* Chat Icon */}
+
         <div className="flex gap-2 p-4 mt-8 md:mt-0">
           <img className="w-full" src={assets.logo_full} alt="" />
         </div>
@@ -112,40 +127,39 @@ function Sidebar({ open, setOpen }) {
               <div className="w-4 h-4 bg-white rounded-full"></div>
             </div>
           </div>
-          {isPending ? (
+          {isLoading ? (
             <div className="h-9 w-full animate-pulse rounded-md bg-gray-700" />
           ) :
             isAuthenticated ? (
-              <button
-                onClick={() => logout()}
-                disabled={loggingOut}
-                className="group w-full flex items-center gap-2 p-2  border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47] disabled:opacity-50 transition-colors duration-200"
-              >
-                <span className="h-6 w-6 shrink-0 rounded-full bg-linear-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
-                  {user.name[0].toUpperCase()}
-                </span>
+              <>
+                <button
+                  onClick={() => logout()}
+                  disabled={isPending}
+                  className="group w-1/2 mx-auto flex items-center gap-2 p-2 justify-center border border-gray-700 rounded-md cursor-pointer hover:bg-[#1e2a47] disabled:opacity-50 transition-colors duration-200"
+                >
+                  <p className="h-6 w-6 shrink-0 rounded-full bg-linear-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
+                    {user.name[0].toUpperCase()}
+                  </p>
 
-                <span className="text-sm truncate">
-                  {loggingOut ? (
-                    "Logging out…"
-                  ) : (
-                    <span className=" font-medium">Logout</span>
-                  )}
-                </span>
-              </button>
+                  <span className="text-sm truncate">
+                    {isPending ? (
+                      "Logging out…"
+                    ) : (
+                      <span className=" font-medium">Logout</span>
+                    )}
+                  </span>
+                </button>
+              </>
             ) : (
               <NavLink
                 to="/login"
-                className="flex w-1/2 mx-auto gap-2 p-2  border border-gray-700 rounded-md cursor-pointer  hover:bg-[#1e2a47]"
+                className="flex w-1/2 mx-auto gap-2 p-2 border border-gray-700 rounded-md cursor-pointer  hover:bg-[#1e2a47]"
               >
-                <span className="h-6 w-6 shrink-0 rounded-full bg-linear-to-br from-[#916CFB] to-[#5A76FD] flex items-center justify-center text-xs font-bold">
-                  G
-                </span>
                 <h1 className="mx-auto">Login</h1>
               </NavLink>
             )}
         </div>
-      </div>
+      </div >
     </>
   );
 }

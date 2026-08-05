@@ -23,6 +23,7 @@ function Login() {
     onSuccess: (data) => {
       toast.success(data.message)
       queryClient.setQueryData(["auth", "me"], data.user);
+      queryClient.invalidateQueries(["auth", "me"]);
       navigate("/", { replace: true });
     },
     onError: (error) => {

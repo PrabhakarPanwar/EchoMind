@@ -68,7 +68,7 @@ export const dummyPlans = [
   {
     _id: "basic",
     name: "Basic",
-    price: 10,
+    price: 100,
     credits: 100,
     features: [
       "100 text generations",
@@ -80,7 +80,7 @@ export const dummyPlans = [
   {
     _id: "pro",
     name: "Pro",
-    price: 20,
+    price: 200,
     credits: 500,
     features: [
       "500 text generations",
@@ -93,7 +93,7 @@ export const dummyPlans = [
   {
     _id: "premium",
     name: "Premium",
-    price: 30,
+    price: 300,
     credits: 1000,
     features: [
       "1000 text generations",
@@ -122,7 +122,7 @@ export const dummyChats = [
       {
         isImage: true,
         isPublished: true,
-        role: "assistant",
+        role: "ai",
         content: ai_image11,
         timestamp: 1755178194747,
       },
@@ -145,7 +145,7 @@ export const dummyChats = [
       {
         isImage: false,
         isPublished: false,
-        role: "assistant",
+        role: "ai",
         content: "Hello! 😊 How can I assist you today?",
         timestamp: 1755106420723,
       },
@@ -159,7 +159,7 @@ export const dummyChats = [
       {
         isImage: true,
         isPublished: true,
-        role: "assistant",
+        role: "ai",
         content: ai_image1,
         timestamp: 1755107486680,
       },
@@ -174,7 +174,7 @@ export const dummyChats = [
       {
         isImage: false,
         isPublished: false,
-        role: "assistant",
+        role: "ai",
         content:
           "Here's a detailed and structured prompt to generate a highly realistic jungle scene with wild animals:  \n\n---  \n\n**Prompt:**  \n*\"Ultra-realistic, hyper-detailed photorealistic jungle landscape teeming with wildlife. The setting is a dense, vibrant rainforest bathed in dappled sunlight filtering through the thick canopy. Towering ancient trees with intricate root systems, lush green ferns, vines, and exotic flowers create a rich, immersive environment. A clear, sparkling stream winds through the scene, reflecting the lush surroundings.  \n\nWildlife in their natural habitat:  \n- A majestic Bengal tiger crouches on a moss-covered rock near the water, muscles tensed as it watches for prey.  \n- A family of elephants moves gently through the undergrowth, led by a large matriarch with a protective stance.  \n- Colorful macaws and parrots perch on high branches, their bright feathers contrasting with the greenery.  \n- A stealthy jaguar lurks in the shadows, its golden eyes piercing.  \n- A troupe of playful monkeys swings from vines, their expressions lively and dynamic.  \n- A slow-moving sloth clings to a tree branch, blending into the foliage.  \n\nAtmospheric elements:  \n- Soft mist lingers near the forest floor, adding depth.  \n- Dragonflies and butterflies hover near the water's edge.  \n- Distant bird calls and rustling leaves create an immersive ambiance.  \n\nCinematic composition with balanced lighting—sunbeams piercing through the canopy in a god-ray effect. Depth of field focuses sharply on the tiger while softly blurring the background for realism. Shot with a high-resolution DSLR style for maximum detail, 8K quality. Ultra HD, National Geographic-style wildlife photography.\"*  \n\n---  \n\n### **Tips for Adjusting the Prompt:**  \n- **For a more serene scene:** Remove predators (like the jaguar) and focus on grazing animals like deer or tapirs.  \n- **For a darker, mysterious tone:** Add rain, stormy lighting, or a twilight setting.  \n- **For more biodiversity:** Include reptiles (snakes, frogs) or insects (beetles, spiders).  \n\nWould you like any modifications for a specific mood or artistic style (e.g., painterly, cinematic, or fantasy-inspired)?",
         timestamp: 1755158995829,
@@ -190,7 +190,7 @@ export const dummyChats = [
       {
         isImage: true,
         isPublished: true,
-        role: "assistant",
+        role: "ai",
         content: ai_image2,
         timestamp: 1755159034238,
       },
@@ -204,7 +204,7 @@ export const dummyChats = [
       {
         isImage: false,
         isPublished: false,
-        role: "assistant",
+        role: "ai",
         content:
           "Here are the top web technologies to learn in 2025 to stay competitive in the industry:\n\n### **Frontend Development**  \n1. **React.js** – Still the dominant frontend library with increasing adoption of **React Server Components (RSC)** and **Next.js**.  \n2. **Next.js (v14+)** – Meta-framework for React enabling **server-side rendering (SSR)**, static site generation (SSG), and edge computing.  \n3. **Vue.js (v3.x + Vite)** – Growing ecosystem with better DX and performance.  \n4. **Svelte & SvelteKit** – Rising in popularity due to its compile-time reactivity and lightweight output.  \n5. **WebAssembly (WASM)** – Enables near-native performance for web apps (used in Figma, Photoshop, etc.).  \n\n### **Backend Development**  \n6. **Node.js (v20+)** – Still leading in JavaScript-based backend development.  \n7. **Deno & Bun** – Faster alternatives to Node.js with modern APIs (Bun is gaining traction for speed).  \n8. **Python (FastAPI, Django, Flask)** – Python remains strong for backend and AI-powered apps.  \n9. **Rust (Actix, Axum, Rocket)** – High-performance backend development with safety guarantees.  \n10. **Go (Golang)** – Valued for scalable backend systems (used by Uber, Twitch, Docker).  \n\n### **Full-Stack & Cloud-Native**  \n11. **GraphQL (Apollo, Relay)** – Alternative to REST for efficient API queries.  \n12. **Serverless (AWS Lambda, Vercel, Cloudflare Workers)** – Shift toward edge computing and serverless architectures.  \n13. **Web3 & Blockchain (Ethereum, Solana, Web3.js, Ethers.js)** – Emerging in decentralized apps (dApps).  \n14. **Microservices & Kubernetes** – Essential for scalable cloud-native apps.  \n\n### **CSS & Styling**  \n15. **Tailwind CSS** – Utility-first CSS framework dominating modern UI development.  \n16. **CSS Modules & CSS-in-JS (Emotion, Styled Components)** – Scoped styling for component-based apps.  \n17. **PostCSS & Modern CSS (Flexbox, Grid, Container Queries)** – Advanced styling techniques.  \n\n### **Database & State Management**  \n18. **PostgreSQL, MongoDB, & Edge Databases (PlanetScale, Neon, Supabase)** – SQL + NoSQL trends.  \n19. **Prisma, DrizzleORM** – Modern ORMs for TypeScript/Node.js.  \n20. **GraphQL Client State (RTK Query, Apollo Client, URQL)** – Managing data efficiently.  \n\n### **Emerging & Future-Proof Tech**  \n21. **AI & LLM Integration (OpenAI, LangChain)** – AI-powered web apps (ChatGPT plugins, copilots).  \n22. **Progressive Web Apps (PWAs + Web APIs)** – Offline-first, installable web apps.  \n23. **WebRTC & Real-Time (Socket.io, Liveblocks, PartyKit)** – Real-time collaboration features.  \n24. **3D & WebGL (Three.js, Babylon.js, React Three Fiber)** – Interactive 3D web experiences.  \n25. **Motion UI & Animation (GSAP, Framer Motion)** – Advanced web animations.  \n\n### **Must-Have Tools & DevOps**  \n- **Git, CI/CD (GitHub Actions, Vercel, Netlify)**  \n- **Docker & Kubernetes** (for containerization)  \n- **Testing (Vitest, Playwright, Cypress, Jest)**  \n\n### **Why Learn These in 2025?**  \n- **Speed & Efficiency**: Tools like **Bun, Rust, and WASM** optimize performance.  \n- **AI Integration**: AI is being embedded into web dev at a rapid pace.  \n- **Edge Computing & Serverless**: Cloud providers are pushing serverless/edge deployments.  \n- **Full-Stack Dominance**: Frameworks like **Next.js, SvelteKit, and Remix** blur frontend/backend lines.  \n\nFocus on **React + Next.js, Rust/Go for backend, TypeScript, and AI integrations** for maximum opportunities in 2025. 🚀  \n\nWould you like a tailored roadmap based on your goals?",
         timestamp: 1755159100513,
@@ -219,7 +219,7 @@ export const dummyChats = [
       {
         isImage: false,
         isPublished: false,
-        role: "assistant",
+        role: "ai",
         content:
           "# Basic Express.js Application\n\nHere's a simple Express.js application setup with some basic routes:\n\n```javascript\n// Import required modules\nconst express = require('express');\nconst path = require('path');\n\n// Create an Express application\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\n// Middleware\napp.use(express.json()); // For parsing application/json\napp.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded\n\n// Serve static files from the 'public' directory\napp.use(express.static(path.join(__dirname, 'public')));\n\n// Basic routes\napp.get('/', (req, res) => {\n  res.send('Welcome to the Express App!');\n});\n\napp.get('/about', (req, res) => {\n  res.send('About Page');\n});\n\n// Example route with parameters\napp.get('/user/:id', (req, res) => {\n  res.send(`User ID: ${req.params.id}`);\n});\n\n// Example POST route\napp.post('/api/data', (req, res) => {\n  console.log(req.body);\n  res.json({ message: 'Data received', data: req.body });\n});\n\n// 404 Error handler\napp.use((req, res) => {\n  res.status(404).send('404 - Not Found');\n});\n\n// Error handling middleware\napp.use((err, req, res, next) => {\n  console.error(err.stack);\n  res.status(500).send('Something went wrong!');\n});\n\n// Start the server\napp.listen(PORT, () => {\n  console.log(`Server is running on http://localhost:${PORT}`);\n});\n```\n\n## Setup Instructions\n\n1. Make sure you have Node.js installed\n2. Create a new directory for your project\n3. Initialize a new Node.js project:\n   ```bash\n   npm init -y\n   ```\n4. Install Express:\n   ```bash\n   npm install express\n   ```\n5. Save the code above in a file named `app.js`\n6. Create a `public` directory if you want to serve static files\n7. Start the server:\n   ```bash\n   node app.js\n   ```\n\n## Features\n- Basic routes ('/', '/about', '/user/:id')\n- POST route for handling form data\n- Static file serving\n- Error handling\n- JSON body parsing\n\nYou can expand this basic setup by adding more routes, connecting to a database, or adding middleware as needed.",
         timestamp: 1755159145294,
@@ -235,7 +235,7 @@ export const dummyChats = [
       {
         isImage: true,
         isPublished: true,
-        role: "assistant",
+        role: "ai",
         content: ai_image3,
         timestamp: 1755159273878,
       },
@@ -249,7 +249,7 @@ export const dummyChats = [
       {
         isImage: false,
         isPublished: false,
-        role: "assistant",
+        role: "ai",
         content:
           "**Web3** (or **Web 3.0**) refers to the next evolution of the internet, centered on **decentralization, blockchain technology, and user ownership of data**. It aims to shift control from large tech companies to users by leveraging cryptographic protocols and peer-to-peer networks.\n\n### **Key Features of Web3:**\n1. **Decentralization**  \n   - No single entity controls the internet; instead, it operates on distributed networks (like blockchains or peer-to-peer systems).\n   - Contrasts with Web2 (the current internet), dominated by centralized platforms like Google, Facebook, and Amazon.\n\n2. **Blockchain & Cryptocurrency**  \n   - Uses blockchain (e.g., Ethereum, Solana) for trustless transactions and smart contracts.\n   - Cryptocurrencies (e.g., Bitcoin, ETH) enable value transfer without intermediaries.\n\n3. **User Ownership & Digital Identity**  \n   - Users own their data (via **decentralized identity** solutions) and monetize it directly.\n   - NFTs (Non-Fungible Tokens) allow ownership of digital assets (art, music, virtual land).\n\n4. **Interoperability & Openness**  \n   - Applications (dApps) can interact seamlessly across different blockchains.\n   - Open-source protocols reduce reliance on proprietary platforms.\n\n5. **Tokenized Incentives**  \n   - Users and developers are rewarded with tokens (e.g., governance tokens, staking rewards).\n\n### **Examples of Web3 Technologies:**\n- **DeFi (Decentralized Finance)** – Peer-to-peer financial services (e.g., Uniswap, Aave).  \n- **NFTs & Digital Ownership** – CryptoPunks, OpenSea, and blockchain gaming.  \n- **DAOs (Decentralized Autonomous Organizations)** – Community-governed entities (e.g., MakerDAO).  \n- **Decentralized Storage** – IPFS, Filecoin (vs. centralized cloud storage like AWS).  \n\n### **Web3 vs. Web2 vs. Web1**\n- **Web1 (1990s-2000s):** Read-only static websites (e.g., early HTML pages).  \n- **Web2 (2000s-present):** Interactive, social media, cloud computing (Facebook, YouTube).  \n- **Web3 (emerging):** Decentralized, user-owned, token-based economies.  \n\n### **Challenges of Web3**\n- **Scalability:** Blockchains struggle with speed and cost (e.g., Ethereum gas fees).  \n- **Regulation:** Governments are still figuring out crypto laws.  \n- **User Experience:** Complex for non-technical users.  \n\nWould you like a deeper dive into any specific aspect? 🚀",
         timestamp: 1755159683847,
@@ -264,7 +264,7 @@ export const dummyChats = [
       {
         isImage: true,
         isPublished: true,
-        role: "assistant",
+        role: "ai",
         content: ai_image4,
         timestamp: 1755160254161,
       },
@@ -278,7 +278,7 @@ export const dummyChats = [
       {
         isImage: true,
         isPublished: true,
-        role: "assistant",
+        role: "ai",
         content: ai_image6,
         timestamp: 1755163783470,
       },
@@ -292,7 +292,7 @@ export const dummyChats = [
       {
         isImage: true,
         isPublished: true,
-        role: "assistant",
+        role: "ai",
         content: ai_image7,
         timestamp: 1755164001928,
       },

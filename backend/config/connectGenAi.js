@@ -7,6 +7,5 @@ export async function generateReply(prompt) {
     model: "gemini-3.6-flash",
     contents: `Talk like a friend without filter and keep talking minimum ${prompt}`,
   });
-
   return response.text;
 }

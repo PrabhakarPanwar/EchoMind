@@ -4,7 +4,7 @@ import axiosInstance from "../api/axios";
 export function useAuth() {
   const {
     data: user,
-    isPending,
+    isLoading,
     isError,
   } = useQuery({
     queryKey: ["auth", "me"],
@@ -23,5 +23,5 @@ export function useAuth() {
     retry: false,
     refetchOnWindowFocus: false,
   })
-  return { user, isPending, isError, isAuthenticated: !!user, isGuest: !user && !isPending && !isError };
+  return { user, isLoading, isError, isAuthenticated: !!user, isGuest: !user && !isLoading && !isError };
 }

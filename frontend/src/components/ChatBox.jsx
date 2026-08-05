@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import axiosInstance from '../../api/axios'
 import { assets } from './../assets/assets';
+import { toast } from 'react-toastify';
 
 function ChatBox() {
     const [prompt, setPrompt] = useState("")
@@ -28,8 +29,14 @@ function ChatBox() {
     })
 
     const handleSend = () => {
+        if (!prompt) {
+            toast.error("Prompt required");
+            return;
+        }
+
         if (isPending) return
         mutate(prompt)
+
     }
 
     const handleStop = () => {

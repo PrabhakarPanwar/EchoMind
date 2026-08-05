@@ -12,8 +12,10 @@ const HomeRouter = express.Router();
 
 HomeRouter.post("/register", register);
 HomeRouter.post("/login", login);
-HomeRouter.post("/promptData", chatPrompt);
+
 HomeRouter.post("/logout", logout);
+
+HomeRouter.post("/promptData", verify, chatPrompt);
 
 HomeRouter.get("/auth", verify, authenticate);
 

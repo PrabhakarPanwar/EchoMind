@@ -76,9 +76,6 @@ export const logout = (req, res) => {
 
 export const chatPrompt = async (req, res) => {
   const { prompt } = req.body;
-  if (!prompt || !prompt.trim()) {
-    return res.status(400).json({ message: "Prompt is required" });
-  }
 
   try {
     const reply = await generateReply(prompt);
